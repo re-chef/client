@@ -8,54 +8,50 @@ $(document).ready(function () {
 })
 
 function searchRecipe(value) {
-    if(localStorage.getItem('token') == null) {
-        swal('you have to login first')
-    }else {
+    if (localStorage.getItem('token') == null) {
+        swal('Please login with your Google Account')
+    } else {
+        let page = 'http://localhost:3000/recipes'
 
-    
-    let page = 'http://localhost:3000/recipes'
-    if (value) {
-        page = `http://localhost:3000/recipes/search?recipes=${value}`
-    }
+        if (value) {
+            page = `http://localhost:3000/recipes/search?recipes=${value}`
+        }
 
-    $.ajax({
-        url: page,
-        method: 'GET'
-    })
-        .done(function (list) {
-            let html = ''
-            if (list.count == 0) {
-                html = '404 - RECIPE NOT FOUND'
-                console.log(html, 'html')
-                $('.notfound').empty()
-                $('.notfound').append(html)
-            }
-
-            for (let i = 0; i < list.recipes.length; i++) {
-                html += `
-            <div class="col-md-3 col-sm-6">
-                <div class="product-grid">
-                    <div class="product-image">
-                        <a href="#">
-                            <img class="pic-1" src="${list.recipes[i].image_url}">
-                        </a>
-                    </div>
-                    <div class="product-content">
-                        <h3 class="title"><a href="#" onclick="getRecipe('${list.recipes[i].recipe_id}')">${list.recipes[i].title}</a></h3>
-                    </div>
-                </div>
-            </div>`
-            }
-
-            $('.row').empty()
-            $('.row').append(html)
+        $.ajax({
+            url: page,
+            method: 'GET'
         })
+            .done(function (list) {
+                let html = ''
+                if (list.count == 0) {
+                    html = '404 - RECIPE NOT FOUND'
+                    $('.notfound').empty()
+                    $('.notfound').append(html)
+                }
+
+                for (let i = 0; i < list.recipes.length; i++) {
+                    html += `
+                    <div class="col-md-3 col-sm-6">
+                        <div class="product-grid">
+                            <div class="product-image">
+                                <a href="#">
+                                    <img class="pic-1" src="${list.recipes[i].image_url}">
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <h3 class="title"><a href="#" onclick="getRecipe('${list.recipes[i].recipe_id}')">${list.recipes[i].title}</a></h3>
+                            </div>
+                        </div>
+                    </div>`
+                }
+
+                $('.row').empty()
+                $('.row').append(html)
+            })
     }
 }
 
 function translateIngredients(ingredients) {
-    console.log('masuk keke funtion');
-
     $.ajax({
         method: 'POST',
         url: 'http://localhost:3000/translate',
@@ -65,19 +61,19 @@ function translateIngredients(ingredients) {
     })
         .done(({ data }) => {
             let translated = data.split(',')
-            let html = ''
+            let html = '<h3>Bahan</h3>'
             translated.forEach(p => {
-               html+= `<p>${p}</p>`
+                html += `<p>${p}</p>`
             })
 
-            $('#translatedPage').append(html)
+            $('.recipe').empty()
+            $('.recipe').html(html)
 
         })
         .fail(err => {
             console.log(err);
 
         })
-    console.log(ingredients, "====ingredient");
 
 }
 
@@ -108,20 +104,16 @@ function getRecipe(values) {
                         <h3>Social Rank</h3>
                         <p>${data.recipe.social_rank}</p>
                     </div>
-                    <div>
-                        <h3>Share on Social</h3>
-                        <a href="#" class="fa fa-facebook"></a>
-                        <a href="#" class="fa fa-twitter"></a>
-                        <a href="#" class="fa fa-instagram"></a>
-                        <a href="#" class="fa fa-pinterest"></a>
-                        <a href="#" class="fa fa-tumblr"></a>
+                    <div class="row">
+                        <div class="col s6">
+                        <button class="waves-effect waves-light btn-large" onclick="searchVideo('${data.recipe.title}')">YouTube</button>
+                        </div>
+                        <div class="col s6">
+                        <button class="waves-effect waves-light btn-large" onclick="translateIngredients('${ingredients}')">translate</button>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <button onclick="searchVideo('${data.recipe.title}')">YouTube</button>
-                </div>
             </div>
-            <a href="#" onclick="translateIngredients('${ingredients}')">translate</a>
         </div>
         <div class="recipe">
             <h3>Ingredients</h3>
@@ -137,8 +129,6 @@ function getRecipe(values) {
 }
 
 function searchVideo(value) {
-    console.log('masuk  youtube');
-    
     let url = `http://localhost:3000/video?search=${value}`
 
     $.ajax({
@@ -155,7 +145,14 @@ function searchVideo(value) {
                         throw BreakException
                     } else {
                         video += `<div class="col s4" style="text-align:center">
-                        <iframe src="https://www.youtube.com/embed/${item.id.videoId}" height="200" width="300"></iframe>
+                        <iframe src="https://www.youtube.com/embed/${item.id.videoId}" height="200"
+                        width="300"
+                        allowfullscreen="allowfullscreen"
+                        mozallowfullscreen="mozallowfullscreen"
+                        msallowfullscreen="msallowfullscreen"
+                        oallowfullscreen="oallowfullscreen"
+                        webkitallowfullscreen="webkitallowfullscreen">
+                        ></iframe>
                         <br>
                         <a href=https://www.youtube.com/watch?v=${item.id.videoId}>${item.snippet.title}</a>
                         <br>
@@ -177,9 +174,6 @@ function searchVideo(value) {
 
 
 // //google signin
-
-
-
 function onSignIn(googleUser) {
     console.log('masuk sini');
 
@@ -192,11 +186,10 @@ function onSignIn(googleUser) {
         }
     })
         .done(response => {
-            console.log(response);
+            console.log(response.data.first_name);
 
             localStorage.setItem('token', response.token)
-            // getPage()
-            // getFollowings()
+            swal(`Welcome to Re-Chef, ${response.data.first_name} ${response.data.last_name}`)
         })
         .fail(err => {
             console.log(err);
@@ -209,5 +202,6 @@ function signOut() {
         console.log('User signed out.');
     });
     localStorage.removeItem('token')
+    $('.row').empty()
+    swal('See youu..')
 }
-

@@ -16,9 +16,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/stylesheet/main.css">
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
     <!-- google api-->
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -44,20 +44,17 @@
                             <div class="g-signin2" data-onsuccess="onSignIn"></div>
                         </div>
                         <div class="logout">
-                            <a href="#" onclick="signOut();">Sign out</a>
+                            <button class="waves-effect waves-light btn" href="#" onclick="signOut();">Sign out</button>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="member"> -->
-                <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                <!-- <div class=""> -->
-                <a href="">Login</a>
             </div>
         </section>
-        
+
         <section id="main">
             <div class="mainPage">
                 <div class="notfound"></div>
+                <div class="row"></div>
             </div>
             <div id="translatedPage"></div>
         </section>
