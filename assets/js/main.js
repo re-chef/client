@@ -56,29 +56,39 @@ function getRecipe(values) {
             }
             let html = `
         <div>
-        <h1 class="product-title">${data.recipe.title}</h1>
+            <h1 class="product-title">${data.recipe.title}</h1>
         </div>
         <div id="product-page">
-            <div class="product-image">
-                <img src="${data.recipe.image_url}" alt="">
-            </div>
-            <div>
-                <div class="publisher">
-                    <h3>Publisher</h3>
-                    <p>${data.recipe.publisher}</p>
+            <div class="product-container">
+                <div class="product-image">
+                    <img src="${data.recipe.image_url}" alt="${data.recipe.title}">
                 </div>
-                <div class="social-rank">
-                    <h3>Social Rank</h3>
-                    <p>${data.recipe.social_rank}</p>
-                </div>
-                <div class="recipe">
-                    <h3>Ingredients</h3>
-                    <div>${str}</div>
+                <div class="information">
+                    <div class="publisher">
+                        <h3>Publisher</h3>
+                        <p>${data.recipe.publisher}</p>
+                    </div>
+                    <div class="social-rank">
+                        <h3>Social Rank</h3>
+                        <p>${data.recipe.social_rank}</p>
+                    </div>
+                    <div>
+                        <h3>Share on Social</h3>
+                        <a href="#" class="fa fa-facebook"></a>
+                        <a href="#" class="fa fa-twitter"></a>
+                        <a href="#" class="fa fa-instagram"></a>
+                        <a href="#" class="fa fa-pinterest"></a>
+                        <a href="#" class="fa fa-tumblr"></a>
+                    </div>
                 </div>
                 <div>
                     <button onclick="searchVideo('${data.recipe.title}')">YouTube</button>
                 </div>
             </div>
+        </div>
+        <div class="recipe">
+            <h3>Ingredients</h3>
+            <div>${str}</div>
         </div>
         `
             $('.row').empty()
