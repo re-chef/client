@@ -6,34 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Re-Chef</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-
     <meta name="google-signin-client_id"
         content="85120204910-1uui4oq6h4lmecmtiom7065a9tgb17d4.apps.googleusercontent.com">
 
+
     <!-- bootstrap-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/stylesheet/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
     <!-- google api-->
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-
-    </script>
-
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="http://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
         </script>
-
-
 </head>
 
 <body>
@@ -53,28 +44,21 @@
                             <div class="g-signin2" data-onsuccess="onSignIn"></div>
                         </div>
                         <div class="logout">
-                            <a href="#" onclick="signOut();">Sign out</a>
+                            <button class="waves-effect waves-light btn" href="#" onclick="signOut();">Sign out</button>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="member"> -->
-                <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                <!-- <div class=""> -->
-                <a href="">Login</a>
             </div>
         </section>
+
         <section id="main">
             <div class="mainPage">
                 <div class="notfound"></div>
-                <div class="row">SEARCH FOR RECIPE</div>
-                <div id="translatedPage"></div>
+                <div class="row"></div>
             </div>
+            <div id="translatedPage"></div>
         </section>
-        <section id="footer">
-            <div>
-                <h5>© 2019, ANAK HACKTIV8 </h5>
-            </div>
-        </section>
+
     </div>
     <script src="./assets/js/main.js"></script>
 </body>
