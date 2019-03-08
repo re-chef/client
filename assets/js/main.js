@@ -7,7 +7,12 @@ $(document).ready(function () {
     })
 })
 
-function search(value) {
+function searchRecipe(value) {
+    if(localStorage.getItem('token') == null) {
+        swal('you have to login first')
+    }else {
+
+    
     let page = 'http://localhost:3000/recipes'
     if (value) {
         page = `http://localhost:3000/recipes/search?recipes=${value}`
@@ -25,7 +30,7 @@ function search(value) {
                 $('.notfound').empty()
                 $('.notfound').append(html)
             }
-            
+
             for (let i = 0; i < list.recipes.length; i++) {
                 html += `
             <div class="col-md-3 col-sm-6">
@@ -41,19 +46,50 @@ function search(value) {
                 </div>
             </div>`
             }
-            
+
             $('.row').empty()
             $('.row').append(html)
         })
+    }
+}
+
+function translateIngredients(ingredients) {
+    console.log('masuk keke funtion');
+
+    $.ajax({
+        method: 'POST',
+        url: 'http://localhost:3000/translate',
+        data: {
+            text: ingredients
+        }
+    })
+        .done(({ data }) => {
+            let translated = data.split(',')
+            let html = ''
+            translated.forEach(p => {
+               html+= `<p>${p}</p>`
+            })
+
+            $('#translatedPage').append(html)
+
+        })
+        .fail(err => {
+            console.log(err);
+
+        })
+    console.log(ingredients, "====ingredient");
+
 }
 
 function getRecipe(values) {
     axios.get(`http://localhost:3000/recipes/${values}`)
+
         .then(({ data }) => {
             let str = ''
             for (let i = 0; i < data.recipe.ingredients.length; i++) {
                 str += `<p>${data.recipe.ingredients[i]}</p>`
             }
+            const ingredients = data.recipe.ingredients.join(',').replace(/'/g, '');
             let html = `
         <div>
             <h1 class="product-title">${data.recipe.title}</h1>
@@ -85,6 +121,7 @@ function getRecipe(values) {
                     <button onclick="searchVideo('${data.recipe.title}')">YouTube</button>
                 </div>
             </div>
+            <a href="#" onclick="translateIngredients('${ingredients}')">translate</a>
         </div>
         <div class="recipe">
             <h3>Ingredients</h3>
@@ -100,6 +137,8 @@ function getRecipe(values) {
 }
 
 function searchVideo(value) {
+    console.log('masuk  youtube');
+    
     let url = `http://localhost:3000/video?search=${value}`
 
     $.ajax({
@@ -135,3 +174,40 @@ function searchVideo(value) {
 
         })
 }
+
+
+// //google signin
+
+
+
+function onSignIn(googleUser) {
+    console.log('masuk sini');
+
+    var id_token = googleUser.getAuthResponse().id_token;
+    $.ajax({
+        method: 'POST',
+        url: `http://localhost:3000/user/googleSignIn`,
+        data: {
+            id_token: id_token
+        }
+    })
+        .done(response => {
+            console.log(response);
+
+            localStorage.setItem('token', response.token)
+            // getPage()
+            // getFollowings()
+        })
+        .fail(err => {
+            console.log(err);
+        })
+}
+
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        console.log('User signed out.');
+    });
+    localStorage.removeItem('token')
+}
+
