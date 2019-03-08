@@ -39,7 +39,7 @@ function search(value) {
                         </a>
                     </div>
                     <div class="product-content">
-                        <h3 class="title"><a href="#">${list.recipes[i].title}</a></h3>
+                        <h3 class="title"><a href="#" onclick="getRecipe('${list.recipes[i].recipe_id}')">${list.recipes[i].title}</a></h3>
                     </div>
                 </div>
             </div>`
@@ -47,5 +47,46 @@ function search(value) {
         console.log(html, 'html')
         $('.row').empty()
         $('.row').append(html)
+    })
+}
+
+function getRecipe(values) {
+    console.log(values,'values')
+    axios.get(`http://localhost:3000/recipes/${values}`)
+    .then(({ data }) => {
+        let str = ''
+        for (let i = 0; i < data.recipe.ingredients.length; i++) {
+            console.log(data.recipe.ingredients[i])
+            str += `<p>${data.recipe.ingredients[i]}</p>`
+        }
+        let html = `
+        <div>
+        <h1 class="product-title">${data.recipe.title}</h1>
+        </div>
+        <div id="product-page">
+            <div class="product-image">
+                <img src="${data.recipe.image_url}" alt="">
+            </div>
+            <div>
+                <div class="publisher">
+                    <h3>Publisher</h3>
+                    <p>${data.recipe.publisher}</p>
+                </div>
+                <div class="social-rank">
+                    <h3>Social Rank</h3>
+                    <p>${data.recipe.social_rank}</p>
+                </div>
+                <div class="recipe">
+                    <h3>Ingredients</h3>
+                    <div>${str}</div>
+                </div>
+            </div>
+        </div>
+        `
+        $('.row').empty()
+        $('.row').append(html)
+    })
+    .catch((error) => {
+        console.log(error)
     })
 }
