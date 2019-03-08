@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/stylesheet/main.css">
+    
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="85120204910-1uui4oq6h4lmecmtiom7065a9tgb17d4.apps.googleusercontent.com">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script
         src="http://code.jquery.com/jquery-3.3.1.min.js"
@@ -21,7 +24,7 @@
 <body>
     <div id="website-wrapper">
         <section id="header">
-            <div>
+            <div class="container">
                 <div class="logo">
                     <a href="/">RE-CHEF</a>
                 </div>
@@ -29,46 +32,29 @@
                     <input type="text" placeholder="Search Recipes" class="search-recipes" onchange="search(this.value)">
                 </div>
                 <div class="member">
-                    <div class="">
-                        <a href="">Login</a>
-                    </div>
-                    <div class="">
-                        <a href="">Register</a>
+                    <div class="member-container">
+                        <div class="login">
+                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                        </div>
+                        <div class="logout">
+                            <a href="#" onclick="signOut();">Sign out</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
         <section id="main">
             <div class="mainPage">
-                <div class="notfound">PLEASE SEARCH YOUR FAVOURITE FOOD</div>
-                <div class="row"></div>
-                <!-- <div class="recipe-page"></div> -->
+                <div class="notfound"></div>
+                <div class="row">SEARCH FOR RECIPE</div>
             </div>
         </section>
         <section id="footer">
-
+            <div>
+                <h5>© 2019, ANAK HACKTIV8 </h5>
+            </div>
         </section>
     </div>
     <script src="./assets/js/main.js"></script>
 </body>
 </html>
-
-<!-- <div>
-    <h1 class="product-title"></h1>
-</div>
-<div id="product-page">
-    <div class="product-image">
-        <img src="" alt="">
-    </div>
-    <div>
-        <div class="publisher">
-
-        </div>
-        <div class="social-rank">
-
-        </div>
-        <div class="recipe">
-
-        </div>
-    </div>
-</div> -->
