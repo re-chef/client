@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Re-Chef</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+=======
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id"
+        content="85120204910-1uui4oq6h4lmecmtiom7065a9tgb17d4.apps.googleusercontent.com">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+>>>>>>> login
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/stylesheet/main.css">
     
     <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -22,7 +32,18 @@
         crossorigin="anonymous">
     </script>
     <!-- <a href=""onclick="return "></a> -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
 </head>
+
 <body>
     <div id="website-wrapper">
         <section id="header">
@@ -31,6 +52,7 @@
                     <a href="/">RE-CHEF</a>
                 </div>
                 <div class="search">
+<<<<<<< HEAD
                     <input type="text" placeholder="Search Recipes" class="search-recipes" onchange="search(this.value)">
                 </div>
                 <div class="member">
@@ -42,11 +64,20 @@
                             <a href="#" onclick="signOut();">Sign out</a>
                         </div>
                     </div>
+=======
+                    <input type="text" placeholder="Search Recipes" class="search-recipes"
+                        onchange="search(this.value)">
+>>>>>>> login
                 </div>
+                <!-- <div class="member"> -->
+                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                <!-- <div class=""> -->
+                <a href="">Login</a>
             </div>
         </section>
         <section id="main">
             <div class="mainPage">
+<<<<<<< HEAD
                 <div class="notfound"></div>
                 <div class="row">SEARCH FOR RECIPE</div>
             </div>
@@ -59,4 +90,33 @@
     </div>
     <script src="./assets/js/main.js"></script>
 </body>
+=======
+                <div class="notfound">PLEASE SEARCH YOUR FAVOURITE FOOD</div>
+                <div class="row"></div>
+                <!-- <div class="recipe-page"></div> -->
+            <div class="">
+                <a href="#" onclick="signOut();">Sign out</a>
+                <!-- <a href="">Register</a> -->
+            </div>
+    </div>
+    </div>
+    </section>
+    <section id="main">
+        <div class="mainPage">
+            <div class="notfound">PLEASE SEARCH YOUR FAVOURITE FOOD</div>
+            <div class="row"></div>
+        </div>
+    </section>
+    <section id="footer">
+
+    </section>
+    </div>
+    <script>
+
+    </script>
+
+    <script src="./assets/js/main.js"></script>
+</body>
+
+>>>>>>> login
 </html>
